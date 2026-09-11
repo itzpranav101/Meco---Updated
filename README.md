@@ -1,107 +1,49 @@
-# Meco Memory Companion
+# meco
 
-## Why I made Meco
+## why i made this
 
-Meco started with a pretty simple thought. What if someone living with dementia had something that could help them remember the people they meet and the conversations they have?
+meco started from a pretty simple idea what if someone with dementia had something that could actually help them remember people and conversations. i didnt really want to make another chatbot and just slap an ai label on it. i wanted to build something that could actually be useful in real life and focus on something that people with dementia genuinely struggle with which is remembering the small things. someone visiting you, a conversation you had yesterday or even someone you know but just cant remember the name of. those little things can mean a lot and thats basically where meco came from
 
-I didnt want to make another AI chatbot and call it a dementia solution. I wanted to build something that actually focused on memory and the small moments that can easily get forgotten.
+## what meco does
 
-For someone with dementia, forgetting a persons name or not remembering a recent conversation can be really frustrating. I wanted Meco to make those moments a little easier by giving the person something familiar to fall back on.
+meco is a memory companion that helps patients and caregivers keep track of people, memories, conversations, visits and other important things. caregivers can add trusted people and give meco some basic information about them and meco can then use their face and voice to recognise them when they visit. the idea is pretty simple really instead of the patient constantly having to ask who someone is, meco can help remind them
 
-## What Meco does
+## remembering people
 
-Meco is basically a memory companion that can remember important people, conversations, visits and little details about a person.
+one of the first things i wanted to build was face recognition. caregivers can add someone and capture a few different angles of their face and meco uses those to recognise the person when they appear in patient mode. i made it check multiple frames instead of trusting one random camera frame because that would obviously get pretty messy lol. there is also optional voice recognition so if someone has their voice enrolled meco can try to recognise them while they are talking too
 
-A caregiver can add trusted people and give Meco some information about them. Meco can then use their face and voice to recognise them when they visit and connect them back to memories the patient already has.
+## remembering conversations
 
-The idea is that instead of the patient constantly having to ask who someone is, Meco can help remind them naturally.
+meco can listen to conversations during visits and turn them into a transcript. it can also separate different people speaking so you dont just end up with one giant paragraph of text. if meco recognises a trusted persons voice it can replace the speaker label with their name. after the conversation meco can turn everything into a visit report with things like what was talked about, memory cues, important topics and things a caregiver might want to check on later
 
-## Remembering people
+## the companion
 
-One of the main things I wanted Meco to do was recognise familiar people.
+i didnt want meco to only be useful when someone was visiting so i added a companion that lets the patient talk to meco between visits. it can use things already stored in their memories to bring up familiar topics and reminiscence prompts. so if someone has a memory about gardening meco might bring that up naturally during a conversation. there is also a wellbeing trend and caregiver alerts for conversations that might be worth looking at. its not supposed to diagnose anything its just meant to give caregivers another bit of information
 
-Caregivers can add someone with their name, relationship and a memory cue. They can also add their face and an optional voice sample.
+## the journal
 
-When that person visits, Meco can use the camera to recognise them. I made it check different angles of the persons face instead of just saving one photo because I wanted it to work more like an actual recognition system.
+there is also a journal where patients can write about their day and track their mood. over time this gives them something personal to look back on and gives caregivers another way to understand how things have been going. i actually liked this feature because sometimes the small stuff matters more than one big report
 
-If Meco recognises someone, it can introduce them using the browser voice.
+## visits
 
-## Remembering conversations
+caregivers can create visits and reminders inside meco and they can also make things repeat every week. i connected google calendar too so changes made in meco can sync with the calendar and changes in the calendar can come back into meco. basically less stuff for caregivers to manually update
 
-Meco can also listen to visits and turn conversations into transcripts.
+## making it easy to use
 
-The cool part is that it doesnt just turn everything into one huge block of text. It tries to separate the different people speaking, and if a trusted persons voice has been enrolled it can replace the generic speaker label with their actual name.
+i didnt want the patient side to look like some massive complicated software dashboard. patient mode is kept pretty simple with bigger text and larger buttons while the caregiver side has more information because thats where things like memories, people, visits and reports need to be managed
 
-The transcript can then be used to create a simple visit report with things like what was discussed, important memory cues and things a caregiver might want to follow up on.
+## languages
 
-## The companion
+i also wanted meco to work for families that dont always speak english. live conversations can be translated into mandarin, tamil or hindi because obviously not every family is going to sit around speaking english all day
 
-I also wanted Meco to be useful when nobody was visiting.
+## how i built it
 
-The Companion gives the patient someone to talk to between visits. It can use their existing memory cues to bring up familiar topics and reminiscence prompts.
+meco is a web app built with node, html, css and javascript. i used clerk for accounts and appwrite for storing data. for live transcription i used deepgram and assemblyai as a backup for recorded conversations. i used resemblyzer for the voice recognition part and for the ai reports i used gemini with groq as a backup. i also made local fallbacks for some of the features because i didnt want the entire app to randomly die if one ai service stopped working
 
-There is also a wellbeing trend and caregiver alerts for conversations that might be worth looking at more closely.
+## the hardest part
 
-It is not meant to diagnose anything. I wanted it to be more like an extra layer of support for caregivers.
+honestly the hardest part wasnt really one specific feature it was getting everything to work together. camera, microphone, transcription, speaker recognition, face recognition, ai, calendar, authentication and data storage all had to somehow work together without making the app completely painful to use. the live transcription was probably one of the more interesting parts because audio gets streamed through the server while the conversation is happening and the transcript comes back almost immediately. there were definitely a lot of moments where something would randomly break and id sit there wondering why it worked five minutes ago 😭
 
-## The journal
+## why i care about this
 
-Meco has a journal where the patient can write about their day and record their mood.
-
-Over time, those entries can show how their mood has been changing. I liked this idea because not every important part of someones day happens during a conversation with a caregiver.
-
-Sometimes a small journal entry can say a lot.
-
-## Visits and reminders
-
-Caregivers can create visits and reminders inside Meco and even make them repeat every week.
-
-I also connected it with Google Calendar so that changes can move between the two instead of forcing caregivers to update everything twice.
-
-## Making it easier to use
-
-I wanted the patient side of Meco to feel simple and not like some complicated software dashboard.
-
-There is a patient mode with bigger text and larger touch areas so that the important things are easier to find and use.
-
-The caregiver side has more detailed screens for things like people, memories, visits and reports.
-
-## Languages
-
-I wanted Meco to work for families who dont always speak English at home.
-
-The live transcript can optionally be translated into Mandarin, Tamil or Hindi, so conversations dont have to be limited to one language.
-
-## How I built it
-
-I built Meco as a web app using Node, HTML, CSS and JavaScript.
-
-For accounts I used Clerk and for storing the users data I used Appwrite. I also made sure that the important API keys stay on the server rather than being exposed to the browser.
-
-For live transcription I used Deepgram and I added AssemblyAI as a backup for recorded conversations.
-
-For recognising voices I built a small local service using Resemblyzer. For the AI generated visit reports I used Gemini with Groq as a backup.
-
-I also added local fallbacks for some features because I didnt want Meco to completely stop working just because one external AI service went down.
-
-## Some of the harder parts
-
-Honestly, getting all these different parts to work together was probably the hardest part of the project.
-
-It wasnt just about making one AI feature work. I had to get authentication, storage, camera access, microphone recording, transcription, speaker recognition, face recognition, calendars and AI reports to all work together without exposing sensitive information.
-
-The live transcription was especially interesting because the audio has to move through the server while the conversation is happening and then come back as text almost immediately.
-
-I also spent a lot of time making sure that things could still work when some of the AI services were unavailable.
-
-## Why I care about the project
-
-The part I like most about Meco is that it is not really about the AI.
-
-The AI is just what makes some of the features possible. The actual point is helping someone hold onto the little things that make people familiar.
-
-A name. A face. A conversation. A memory about something they used to love.
-
-Those things can seem tiny, but when someone is struggling with memory, they can mean a lot.
-
-Thats why I wanted to build Meco.
+the thing i like most about meco is that its not really about the ai. the ai is just what lets me build some of these features. the actual point is helping someone hold onto the little things that make people familiar. a name, a face, a conversation or a memory about something they love. those things might seem small but when someone is struggling with their memory they can mean a lot and thats really why i built meco
